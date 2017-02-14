@@ -1,1 +1,1 @@
-# text-editor
+Creating  a Notepad using react native.
