@@ -4,28 +4,24 @@ import
 {AppRegistry,
   View,
   Text,
-  StyleSheet    
+  StyleSheet, 
+  TouchableHighlight
 } from 'react-native';
-
 
 export default class HomeScreen extends Component{
     render(){
         return(
           <View>
-             <Text style = {styles.container}>
-               Home Screen
-             </Text>
-          </View>    
+            <TouchableHighlight>
+             <Text>
+                Home
+              </Text>
+            </TouchableHighlight>
+          </View>   
         ); 
     }
 }
 
-const styles = StyleSheet.create({
-     container:{
-          flex:1,
-          alignItems:'center',
-          justifyContent:'center',
-     }
-});
 
-AppRegistry.registerComponent('NavProject', () => HomeScreen);
+
+AppRegistry.registerComponent('NavProject',()=> HomeScreen);

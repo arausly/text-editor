@@ -1,27 +1,27 @@
 import React, {Component} from 'react';
 import {  
  View,
+ AppRegistry,
  Text,
- StyleSheet
- }from 'react-native'
+ StyleSheet,
+ TouchableHighlight
+ }from 'react-native';
 
-
+ 
 export default class  NotePage extends Component{
     render(){
         return(
          <View>
-             <Text style = {yep.text}>
+            <TouchableHighlight>
+             <Text>
                    Create Your Note!
              </Text>
+            </TouchableHighlight>
          </View>        
             
         );
     }
 }
-var yep = StyleSheet.create({
-    text:{
-           alignItems:'center',
-           justifyContent:'center',
-           flexDirection:'row',
-    }
-});
+
+
+AppRegistry.registerComponent('NavProject',()=> NotePage);

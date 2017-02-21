@@ -15,87 +15,120 @@ import {
 } from 'react-native';
 
 import ButtonPage from './jara/initialpage';
-import  ReactNote from './jara/4navigator';
-import  NotePage from'./jara/Notescreen';
+import NotePage from './jara/Notescreen';
+import HomeScreen from './jara/HomePage';
+
 
  var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
     if(index > 0) {
       return (
-      <View style = {styles.letsSee}>
         <TouchableHighlight
           underlayColor="transparent"
           onPress={() => { if (index > 0) { navigator.pop() } }}>
           <Text style={ styles.leftNavButtonText }>Back</Text>
-        </TouchableHighlight>
-      </View>         
+        </TouchableHighlight>        
           );
     } 
     else { return null }
   },
   RightButton(route, navigator, index, navState) {
     if (index <= 0) return (
-      <View style = {styles.trial}>    
         <ButtonPage
         onPress ={() => {
         navigator.push({
-            page: 'create Note page'
         });
       }}
        customText = 'create Note'
-       />
-     </View>       
+       />  
          );
   },
   Title(route, navigator, index, navState) {
     return (
-        <Text style={ styles.title }>MY APP TITLE</Text>
+        <Text style={ styles.title }>Home Page</Text>
         );
   }
 };
  
 
 class NavProject extends Component{
-    renderScene(route,navigator){
-       return(
-           <route.component navigator = {navigator}/>
-             );
-           }
  render(){
-     return(
-         <View style = {styles.MainContainer}>
-           <View style = {styles.container}>
-              <ButtonPage/>
-           </View>
-         
+     
+     const routes =[
+         { page: 'Home'},
+         { page : 'Create Note'},
+     ];
+     return( 
+          <View style = {styles.MainContainer}>
          <Navigator
-             initialRoute ={{page: 'Home'}}
-             renderScene ={
-             (route,navigator) => this.renderScene.bind(this)}
+             initialRoute ={routes[0]}
+             initialRouteStack ={routes} 
+             renderScene ={(route,navigator) =>{
+              if(route.page === "Home"){
+                     return(
+                       <View style ={styles.scontainer}>
+                           <View style ={styles.subcontainer}>
+                              <HomeScreen/>
+                           </View>
+                       </View>     
+                     );
+              }
+                else{
+                      return(
+                        <View style = {styles.container}>
+                          <View style = {styles.subcontainer}>     
+                            <NotePage/>
+                          </View>
+                        </View>  
+                    );
+                }
+               /*   default:
+                      return(
+                       <View style={{flex:1}}>
+                          <Text style = {{fontSize:30,
+                          textAlign:'center'}}>
+                            Error 404 page not found
+                          </Text>
+                       </View>      
+                      );*/
+              }
+            }
              navigationBar ={
               <Navigator.NavigationBar
                 routeMapper = {NavigationBarRouteMapper}
             />
             }
+            configScene ={(route,navigator) =>
+            Navigator.sceneConfigs.floatFromBottom}
          />
-         </View>     
+         </View>
      );
   }
  }
-
-
-
+  
 const styles =  StyleSheet.create({
-   container:{
-                flex:1,
-                justifyContent:'center',
-                alignItems:'center',
-   }
     
-    trial:{
-             backgroundColor:'#2890bd',  
- }
-    
+     MainContainer:{
+         flex:1,
+
+     },
+      container:{
+         backgroundColor:'#ff6c5c',
+          flex:1,
+          marginTop:40,
+     },
+     subcontainer:{
+          flex:1,
+         justifyContent:'center',
+         alignItems:'center',
+     },
+  scontainer:{
+      backgroundColor:'#47ebe0',
+      flex:1,
+    marginTop: 40,
+  
+  }
+ 
 });
 
 

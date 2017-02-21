@@ -25,7 +25,5 @@ ButtonPage.propTypes = {
     onPress:React.PropTypes.func,
     customText:React.PropTypes.string 
 };
-
-
-
+AppRegistry.registerComponent('NavProject',()=> ButtonPage);
  
